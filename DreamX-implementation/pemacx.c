@@ -1,11 +1,15 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
 
 // Function prototypes
+// void Validate_Inputs(const int *Adder_Config, const double *Probability_A_bits, const double *Probability_B_bits, double Probability_C_in, int length);
 void Partial_PMF_Computation(int I, double A_p, double B_p, double C_in_p, double Sig, double *C_out_p, double *PMF_00, double *PMF_01, double *PMF_10, double *PMF_11);
+// void Convolve(const double *x, int x_len, const double *y, int y_len, double *result);
 void Probability_to_PMF(const int *Indexes, int Indexes_len, const double *IPM_full, const double *Err_full, double Sig, double *PMF) ;
+void Convolve(const double *x, int x_len, const double *y, int y_len, double **result, int *result_len) ;
 void Validate_Inputs(const int *Adder_Config, const double *Probability_A_bits, const double *Probability_B_bits, double Probability_C_in, int length);
 double* Convolution(double* a, int len_a, double* b, int len_b) ;
 
@@ -251,8 +255,6 @@ void Partial_PMF_Computation(int I, double A_p, double B_p, double C_in_p, doubl
     }
     Probability_to_PMF(Indexes, count, IPM, Err, Sig, PMF_11);
 }
-
-
 void Probability_to_PMF(const int *Indexes, int Indexes_len, const double *IPM_full, const double *Err_full, double Sig, double *PMF) {
     
     int PMF_size = (int)(6 * Sig + 1);
@@ -302,28 +304,4 @@ double* Convolution(double* a, int len_a, double* b, int len_b) {
 
 
 
-int main() {
-    // Example setup
-    int Adder_Config[8] = {1, 7, 2, 3, 0, 0, 0, 0};
-    double Probability_A_bits[8] = {0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5};
-    double Probability_B_bits[8] = {0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5};
-    double Probability_C_in = 0.5;
-    int length = 8; // Length of the configuration and probability arrays
 
-    // Output variables for PEMACx
-    double MSE = 0.0, MED = 0.0;
-    
-    // Output variables for Exhaustive Simulations
-    double MSE_Ex = 0.0, MED_Ex = 0.0;
-
-    // Call PEMACx function
-    PEMACx(Adder_Config, Probability_A_bits, Probability_B_bits, Probability_C_in, length, &MSE, &MED);
-
-
-    printf("PEMACx Results:\n");
-    printf("MSE: %f\n", MSE);
-    printf("MED: %f\n\n", MED);
-
-
-     return 0;
-}

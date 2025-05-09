@@ -16,12 +16,20 @@ void mergeMultipleTruthTables(int ***outputs, int numAdders, int rows, int outpu
 // Function to merge accurate adders to match approximate adders' size
 void mergeAccurateAdder(int **accurateAdder, int rows, int output_cols, int configSize,
                         int ***finalOutputs, int *finalRows, int *finalOutputCols);
+void printTruthTable(int **outputs, int **A_Array, int **B_Array, int * Cin_Array, int rows, int output_cols, int numBits) ;
 
 // Function to print a truth table
-void printTruthTable(int **outputs, int rows, int output_cols, char output_headers[][10]);
+// void printTruthTable(int **outputs, int rows, int output_cols, char output_headers[][10]);
 
 // Function to initialize truth tables for approximate and accurate adders
 void initializeTruthTables(int ****outputs, int *rows, int *output_cols, int *numAdders,
                            int ***accurateAdder);
 
+
+// void processAndMerge(int ***outputs, int numAdders, int rows, int output_cols, 
+//                      int **accurateAdder, int *LV, int LV_size, int *configuration);
+
+
+void processAndMerge(int ***outputs, int numAdders, int rows, int output_cols, 
+                     int **accurateAdder, int *LV, int LV_size, int *configurationconst , const double *Probability_A_bits, const double *Probability_B_bits, double Probability_C_in, int length, double *MSE, double *MED, double** CPM_00, double** CPM_01, double** CPM_10, double** CPM_11) ;
 #endif // MERGING_H
